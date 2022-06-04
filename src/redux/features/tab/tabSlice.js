@@ -42,8 +42,14 @@ const TabSlice = createSlice({
     setActive: (state, action) => {
       state.active = action.payload;
     },
+    editTab: (state, action) => {
+      const { id, title, query } = action.payload;
+      const tab = state.tabs.find((tab) => tab.id === id);
+      tab.title = title;
+      tab.query = query;
+    },
   },
 });
 
-export const { addTab, deleteTab, setActive } = TabSlice.actions;
+export const { addTab, deleteTab, setActive, editTab } = TabSlice.actions;
 export default TabSlice.reducer;
