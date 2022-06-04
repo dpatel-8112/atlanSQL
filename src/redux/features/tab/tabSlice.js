@@ -9,7 +9,7 @@ const initialState = {
       id: 1,
       title: "SELECT",
       api: "https://dummyjson.com/users",
-      query: "SELECT * from lone_wolf",
+      query: "",
       isDeleted: false,
     },
   ],
