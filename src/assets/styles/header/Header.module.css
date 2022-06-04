@@ -4,12 +4,16 @@
   background-color: rgba(255, 255, 255, 0.107);
   flex: 0.1;
   /* justify-content: center; */
+  align-items: center;
 }
 
 .Tabs {
   display: flex;
   flex-direction: row;
   width: 100%;
+  height: 27px;
+
+  align-items: center;
 }
 
 .Tab {
@@ -18,7 +22,7 @@
   margin: 0px 1px;
   background-color: rgba(255, 230, 0, 0.327);
   width: 200px;
-  /* height: 35px; */
+  height: 30px;
   cursor: pointer;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
@@ -27,7 +31,7 @@
   align-items: center;
 }
 .Tab:hover {
-  background-color: rgba(255, 255, 255, 0.253);
+  /* background-color: rgba(255, 255, 255, 0.253); */
 }
 .TabName {
   display: flex;
@@ -42,4 +46,18 @@
 }
 .CloseIcon:hover {
   background-color: rgba(0, 247, 255, 0.959);
+}
+
+.AddTab {
+  display: flex;
+  cursor: pointer;
+  color: black;
+  margin: 0px 5px;
+}
+.AddTab:hover {
+  background-color: rgba(0, 255, 4, 0.959);
+  border-radius: 60%;
+}
+.ActiveTab {
+  background-color: rgba(255, 204, 0, 0.959);
 }

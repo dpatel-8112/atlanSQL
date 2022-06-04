@@ -64,3 +64,39 @@
   width: 100%;
   justify-content: center;
 }
+.Table_Container {
+  display: flex;
+  width: 90%;
+  height: 85vh;
+}
+.Table_Container table tbody {
+  overflow-y: scroll;
+}
+.Table_Container table {
+  flex-direction: column;
+  display: flex;
+  width: 100%;
+}
+.Table_Container table thead {
+  display: flex;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.107);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.107);
+}
+.Table_Container table tr {
+  display: flex;
+  /* justify-content: space-between; */
+  flex: 1;
+  width: 100%;
+  text-overflow: unset;
+  padding: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.107);
+}
+.Table_Container table tr td,
+.Table_Container table tr th {
+  display: flex;
+  justify-content: center;
+  flex: 1;
+  font-size: small;
+  width: 100%;
+}
