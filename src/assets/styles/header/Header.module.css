@@ -1,0 +1,45 @@
+.Header_Container {
+  display: flex;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.107);
+  flex: 0.1;
+  /* justify-content: center; */
+}
+
+.Tabs {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.Tab {
+  padding: 6px 8px;
+  display: flex;
+  margin: 0px 1px;
+  background-color: rgba(255, 230, 0, 0.327);
+  width: 200px;
+  /* height: 35px; */
+  cursor: pointer;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  justify-content: space-between;
+  font-size: small;
+  align-items: center;
+}
+.Tab:hover {
+  background-color: rgba(255, 255, 255, 0.253);
+}
+.TabName {
+  display: flex;
+}
+.CloseIcon {
+  display: flex;
+  border-radius: 50%;
+  padding: 2px;
+  justify-content: center;
+  align-items: center;
+  font-size: xx-small;
+}
+.CloseIcon:hover {
+  background-color: rgba(0, 247, 255, 0.959);
+}

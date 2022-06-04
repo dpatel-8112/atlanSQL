@@ -1,0 +1,66 @@
+.Main_Container {
+  display: flex;
+  flex: 10;
+  /* justify-content: center; */
+  flex-direction: column;
+  align-items: center;
+}
+
+/*  */
+.Input_Container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 70%;
+  height: 40px;
+}
+.DropDown {
+  display: flex;
+  width: 90%;
+  flex: 1.5;
+  margin-right: 5px;
+}
+.DropDown select {
+  display: flex;
+  height: 100%;
+  padding: 5px 10px;
+  border: 0;
+  outline: 0;
+  cursor: pointer;
+  width: 100%;
+  justify-content: center;
+}
+.DropDown select option {
+}
+.Input {
+  display: flex;
+  flex: 8;
+  width: 100%;
+  justify-content: center;
+  margin-right: 5px;
+}
+.Input input {
+  display: flex;
+  border: 0;
+  outline: 0;
+  width: 100%;
+  padding: 5px 10px;
+  font-family: monospace;
+  font-weight: bold;
+}
+.Button {
+  display: flex;
+  width: 100%;
+  flex: 1;
+}
+.Button button {
+  display: flex;
+  padding: 5px 10px;
+  border: 0;
+  outline: 0;
+  cursor: pointer;
+  width: 100%;
+  justify-content: center;
+}

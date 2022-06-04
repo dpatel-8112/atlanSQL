@@ -1,0 +1,13 @@
+.Footer_Container {
+  display: flex;
+  flex: 0.1;
+  justify-content: center;
+  font-size: small;
+  background-color: rgba(0, 255, 255, 0.466);
+  color: black;
+}
+
+.Footer_Container a {
+  /* text-decoration: none; */
+  color: black;
+}
