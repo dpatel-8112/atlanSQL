@@ -96,7 +96,14 @@
 .Table_Container table tr th {
   display: flex;
   justify-content: center;
+  /* align-items: flex-end; */
   flex: 1;
   font-size: small;
   width: 100%;
+}
+.Table_Container table th input {
+  display: flex;
+  width: 10px;
+  height: 10px;
+  margin: 5px;
 }

@@ -10,16 +10,17 @@ const Main = () => {
 
   const [activeTab, setActiveTab] = useState({
     ...tabState.tabs.filter((item) => item.id === tabState.active)[0],
-    limit: tabState.total,
-    skip: 1,
+    limit: 10,
+    skip: 0,
     data: {},
+    hasMore: true,
   });
 
   useEffect(() => {
     setActiveTab({
       ...tabState.tabs.filter((item) => item.id === tabState.active)[0],
-      limit: tabState.totalTab,
-      skip: 1,
+      limit: 10,
+      skip: 0,
       data: {},
     });
   }, [tabState.active]);
