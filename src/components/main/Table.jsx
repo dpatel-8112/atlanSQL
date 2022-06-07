@@ -147,7 +147,6 @@ const Table = () => {
               </th>
             </tr>
           </thead>
-          {console.log(sortedData)}
           <tbody>
             <InfiniteScroll
               dataLength={sortedData.length}
