@@ -35,7 +35,7 @@ const Header = () => {
         {tabState.tabs
           .filter((tab) => tab.isDeleted === false)
           .map((item, index) => {
-            return <Tab item={item} />;
+            return <Tab key={item.id} item={item} />;
           })}
         <div className={style.AddTab} onClick={addTabHandler}>
           ➕

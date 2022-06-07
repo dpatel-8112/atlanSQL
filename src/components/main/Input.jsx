@@ -3,35 +3,55 @@ import { useDispatch, useSelector } from "react-redux";
 import style from "../../assets/styles/main/Main.module.css";
 import { editTab } from "../../redux/features/tab/tabSlice";
 
-const Input = ({ activeTab }) => {
-  const [selectItem, setSelectItem] = useState("SELECT");
-  const [inputQuery, setInputQuery] = useState("SELECT * from lone_wolf");
+const Input = () => {
+  const [query, setQuery] = useState("");
+  const [title, setTitle] = useState("");
 
   const tabState = useSelector((state) => state.tab);
   const dispatch = useDispatch();
 
-  const editTabHandler = (e) => {
-    const payload = {
-      id: activeTab.id,
-      title: selectItem,
-      query: inputQuery,
-    };
+  useEffect(() => {
+    tabState.tabs.forEach((tab) => {
+      if (tab.id === tabState.active) {
+        setQuery(tab.query || "SELECT");
+      }
+    });
+  }, [tabState.active]);
 
-    dispatch(editTab(payload));
+  const queryHandler = (event) => {
+    setQuery(event.target.value);
   };
 
-  useEffect(() => {
-    editTabHandler();
-    return () => {};
-  }, [selectItem]);
+  const titleHandler = (event) => {
+    setTitle(event.target.value);
+    setQuery(event.target.value);
+    // saveHandler();
+  };
+
+  const saveHandler = () => {
+    tabState.tabs.forEach((tab) => {
+      if (tab.id === tabState.active) {
+        dispatch(
+          editTab({
+            id: tab.id,
+            title: title,
+            api: tab.api,
+            query: query,
+          })
+        );
+      }
+    });
+  };
+
+  const searchHandler = (event) => {
+    event.preventDefault();
+    saveHandler();
+  };
 
   return (
     <div className={style.Input_Container}>
       <div className={style.DropDown}>
-        <select
-          value={selectItem}
-          onChange={(e) => setSelectItem(e.target.value)}
-        >
+        <select value={title} onChange={titleHandler}>
           <option value="SELECT">SELECT</option>
           <option value="CREATE">CREATE</option>
           <option value="ALTER">ALTER</option>
@@ -40,13 +60,15 @@ const Input = ({ activeTab }) => {
       <div className={style.Input}>
         <input
           type="text"
-          placeholder={inputQuery}
-          value={activeTab.query ? activeTab.query : inputQuery}
-          onChange={(e) => setInputQuery(e.target.value)}
+          placeholder={query}
+          value={query}
+          onChange={queryHandler}
         />
       </div>
-      <div className={style.Button} onClick={editTabHandler}>
-        <button type="submit">Enter</button>
+      <div className={style.Button} onClick={searchHandler}>
+        <button type="submit" onClick={searchHandler}>
+          Enter
+        </button>
       </div>
     </div>
   );

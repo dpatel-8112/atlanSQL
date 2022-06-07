@@ -1,8 +1,50 @@
 import React, { useEffect, useState } from "react";
 import style from "../../assets/styles/main/Main.module.css";
 import Row from "./Row";
+import { useSelector, useDispatch } from "react-redux";
+import axios from "axios";
+import InfiniteScroll from "react-infinite-scroll-component";
 
-const Table = ({ activeTab }) => {
+const Table = () => {
+  const tabState = useSelector((state) => state.tab);
+  const dispatch = useDispatch();
+  const [data, setData] = useState({});
+
+  const fetchData = async () => {
+    if (data.users.length >= 100) {
+      setData({ ...data, hasMore: false });
+      return;
+    }
+
+    if (data.api) {
+      const response = await axios.get(
+        `${data.api}?limit=${data.limit}&skip=${data.skip}`
+      );
+      setData({
+        ...data,
+        users: [...data.users, ...response.data.users],
+      });
+    }
+  };
+
+  useEffect(() => {
+    tabState.tabs.forEach((tab) => {
+      if (tab.id === tabState.active) {
+        setData({ ...tab, limit: 10, skip: 0, hasMore: true, users: [] });
+      }
+    });
+    fetchData();
+  }, [tabState.active]);
+
+  useEffect(() => {
+    fetchData();
+  }, [data.skip, data]);
+
+  const handleClick = (event) => {
+    // event.preventDefault();
+    setData({ ...data, skip: data.skip + 10 });
+  };
+
   const initialChecked = {
     username: false,
     firstName: false,
@@ -13,7 +55,7 @@ const Table = ({ activeTab }) => {
 
   const [checked, setChecked] = useState(initialChecked);
 
-  let sortedData = activeTab.data.users ? activeTab.data.users : [];
+  let sortedData = data.users ? data.users : [];
 
   const sortHandler = (e) => {
     setChecked({
@@ -49,81 +91,92 @@ const Table = ({ activeTab }) => {
     });
   };
 
-  useEffect(() => {
-    if (activeTab.data.users) {
-      setChecked(initialChecked);
-    }
-  }, [activeTab.data.users]);
-
   return (
-    <div className={style.Table_Container}>
-      <table>
-        <thead>
-          <tr>
-            <th>Avatar</th>
-            <th>
-              Username
-              <input
-                type="checkbox"
-                onChange={sortHandler}
-                value="username"
-                checked={checked.username}
-              />
-            </th>
-            <th>
-              First Name
-              <input
-                type="checkbox"
-                onChange={sortHandler}
-                value="firstName"
-                checked={checked.firstName}
-              />
-            </th>
-            <th>
-              Last Name
-              <input
-                type="checkbox"
-                onChange={sortHandler}
-                value="lastName"
-                checked={checked.lastName}
-              />
-            </th>
-            <th>
-              Email
-              <input
-                type="checkbox"
-                onChange={sortHandler}
-                value="email"
-                checked={checked.email}
-              />
-            </th>
-            <th>Phone</th>
-
-            <th>
-              University
-              <input
-                type="checkbox"
-                onChange={sortHandler}
-                value="university"
-                checked={checked.university}
-              />
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {console.log(sortedData)}
-          {sortedData ? (
-            sortedData.map((item, index) => {
-              return <Row item={item} />;
-            })
-          ) : (
+    <>
+      <div className={style.Table_Container}>
+        <table>
+          <thead>
             <tr>
-              <td>LOADING . . .</td>
+              <th>Avatar</th>
+              <th>
+                Username
+                <input
+                  type="checkbox"
+                  onChange={sortHandler}
+                  value="username"
+                  checked={checked.username}
+                />
+              </th>
+              <th>
+                First Name
+                <input
+                  type="checkbox"
+                  onChange={sortHandler}
+                  value="firstName"
+                  checked={checked.firstName}
+                />
+              </th>
+              <th>
+                Last Name
+                <input
+                  type="checkbox"
+                  onChange={sortHandler}
+                  value="lastName"
+                  checked={checked.lastName}
+                />
+              </th>
+              <th>
+                Email
+                <input
+                  type="checkbox"
+                  onChange={sortHandler}
+                  value="email"
+                  checked={checked.email}
+                />
+              </th>
+              <th>Phone</th>
+
+              <th>
+                University
+                <input
+                  type="checkbox"
+                  onChange={sortHandler}
+                  value="university"
+                  checked={checked.university}
+                />
+              </th>
             </tr>
-          )}
-        </tbody>
-      </table>
-    </div>
+          </thead>
+          {console.log(sortedData)}
+          <tbody>
+            <InfiniteScroll
+              dataLength={sortedData.length}
+              next={handleClick}
+              hasMore={data.hasMore}
+              height={600}
+              loader={
+                <tr>
+                  <td>
+                    <h4>Loading...</h4>
+                  </td>
+                </tr>
+              }
+              endMessage={
+                <tr>
+                  <td>
+                    <h4>Yay! You have seen it all</h4>
+                  </td>
+                </tr>
+              }
+            >
+              {sortedData.map((item) => (
+                <Row key={item.id} item={item} />
+              ))}
+            </InfiniteScroll>
+          </tbody>
+        </table>
+      </div>
+    </>
   );
 };
 

@@ -4,8 +4,7 @@ const Row = ({ item }) => {
   return (
     <tr key={item.id}>
       <td>
-        <img src="" />
-        <img src={item.image} alt="" srcset="" width="40px" height="40px" />
+        <img src={item.image} alt="" srcSet="" width="40px" height="40px" />
       </td>
       <td>{item.username}</td>
       <td>{item.firstName}</td>
