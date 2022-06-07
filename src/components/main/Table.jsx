@@ -38,7 +38,7 @@ const Table = () => {
 
   useEffect(() => {
     fetchData();
-  }, [data.skip, data]);
+  }, [data.skip]);
 
   const handleClick = (event) => {
     // event.preventDefault();
